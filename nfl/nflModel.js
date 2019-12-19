@@ -11,7 +11,7 @@ async function add(team){
         .returning("id")
 }
 
-async function remove(){
+async function remove(id){
     return db('teams')
         .where('id', Number(id))
         .first()

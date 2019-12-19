@@ -13,4 +13,12 @@ describe("nfl model", function(){
             expect(squad).toHaveLength(1);
         })
     })
+    describe("delete", function() {
+        it("This should delete a team from the NFL DB", async function() {
+            await NFL.remove({ id: 1, id: 2 })
+
+            const squad = await db("teams");
+            expect(squad).toHaveLength(0);
+        })
+    })
 })
