@@ -1,5 +1,5 @@
 const request = require('supertest');
-
+const db = require('')
 const nfl = require("./nfl.js")
 
 describe("NFL TEAMS", function(){
@@ -12,12 +12,19 @@ describe("NFL TEAMS", function(){
         it("Should return 201 Created", function(){
             return request(nfl)
                 .post('/')
-                .send({ team_name: 'bucs' })
-                // .set('Accept', 'application/json')
-                // .expect('Content-Type', /json/)
-                // .expect(201)
+                .send({ id: 1, team_name: "PATS" })
+                .then(response => {
+                    expect(response.status).toBe(201);
+                    })
+                });
+        it('Should return message: Cannot add team', function(){
+            return request(nfl)
+                .post('/')
+                .then(response => {
+                    expect(response.body.message).toBe("Cannot add team")
+                })
         })
-    })
+        })
 })
 
 // return request(nfl)

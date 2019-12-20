@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
             res.status(201).json(signUp)
         })
         .catch(error => {
-            res.status(500).json(error);
+            res.status(500).json({ message: "Cannot add team"});
       });
 })
 
@@ -34,10 +34,5 @@ router.delete('/:id', (req, res) => {
             res.status(500).json({ message: 'Failed to delete scheme' });
           });
 })
-
-
-
-
-
 
 module.exports = router;

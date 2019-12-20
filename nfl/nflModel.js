@@ -2,29 +2,29 @@ const db = require('../data/dbConfig.js');
 
 module.exports ={
     add, 
-    remove
+    remove, 
+    getTeamBy
 }
 
-async function add(team){
+function getTeamBy(filter){
+    return db('teams')
+        .where(filter)
+        .returning('id')
+}
+
+function add(team){
     return db('teams')
         .insert(team)
-        .returning("id")
+        .then(ids => {
+            const [id] = ids;
+
+            return getTeamBy(id);
+        })
 }
 
-async function remove(id){
+function remove(id){
     return db('teams')
-        .where('id', Number(id))
+        .where({ id })
         .first()
-        .then(team => {
-            if(!team){
-                return null
-            } else {
-                return db('teams')
-                    .where({ id })
-                    .del()
-                    .then(() => {
-                        return team
-                    })
-            }
-        })
+        .del()
 }
