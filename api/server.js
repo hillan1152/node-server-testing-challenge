@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 
 // IMPORT ROUTES
-const nflRouter = require('../nfl/nflModel');
+const nflRouter = require('../nfl/nfl.js');
 
 
 const server = express();
